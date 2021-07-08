@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Flask_App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+                <a href="/" class="navbar-brand mr-4">Flask Blog</a>
+                <!-- <button type="button" class="btn btn-dark" data-toggle="button" aria-pressed="false" autocomplete="on">
+                    <span class="navbar-toggler-icon"></span>
+                </button> -->
+                <div class="collapse navbar-collapse" id="navbarToggle"></div>
+                    <div class="navbar-nav mr-auto">
+                        <a href="/" class="navbar-item nav-link">Home</a>
+                        <a href="#" class="navbar-item nav-link">About</a>
+                    </div>
+                    <!-- Navbar Right Side-->
+                    <div class="navbar-nav mr-auto">
+                        {% if current_user.is_authenticated %}
+                        <a href="{{url_for('new_post')}}" class="navbar-item nav-link">New Post</a>
+                        <a href="{{url_for('account')}}" class="navbar-item nav-link">Account</a>
+                            <a href="{{url_for('logout')}}" class="navbar-item nav-link">Logout</a>
+                        {% else %}
+                            <a href="{{url_for('login')}}" class="navbar-item nav-link">Login</a>
+                            <a href="{{url_for('register')}}" class="navbar-item nav-link">Register</a>
+                        {% endif %}
+                        
+                    </div>
+                </div>    
+            </div>
+
+        </nav>
+    </header>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category,message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock  %}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>Our Sidebar</h3>
+                    <p class="text-muted">You can put any text you like here</p>
+                    <ul>
+                        <li>Latest Post</li>
+                        <li>Announcements</li>
+                        <li>Calendars</li>
+                        <li>etc..</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+            <div class="container">
+
+
+
+            </div>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='popper.min.js')}}"></script>
+    <script src="{{url_for('static',filename='jquery-3.4.1.min.js')}}"></script>
+</body>
+</html>

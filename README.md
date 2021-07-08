@@ -1,2 +1,2 @@
-# flass_app
-basic flask app
+Copy Rights Reserved for Kudzai Munyama
+2020 project
